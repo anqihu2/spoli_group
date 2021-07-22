@@ -925,12 +925,12 @@ write.csv(ageCompositeOldModel, "ageCompositeOldModel.csv")
 ```
 
 
-## SL Cross-sectional Development Analyses: Post-hoc t-test of Linguistic SL Composite Scores in each age group
+## SL Cross-sectional Development Analyses: Post-hoc t-test of Linguistic and Nonlinguistic SL Composite Scores in older children
 ```{r}
-# Younger group:
-t.test(compositeAgeTDY$composite_ling, compositeAgeASDY$composite_ling, alternative = "greater")
-# Older group:
-t.test(compositeAgeTDO$composite_ling, compositeAgeASDO$composite_ling, alternative = "greater")
+# Older group linguistic:
+t.test(compositeAgeTDO$composite_ling, compositeAgeASDO$composite_ling)
+# Older group nonlinguistic
+t.test(compositeAgeTDO$composite_nonling, compositeAgeASDO$composite_nonling)
 ```
 
 
