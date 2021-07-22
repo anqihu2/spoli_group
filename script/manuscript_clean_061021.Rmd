@@ -186,6 +186,7 @@ rt_trial <- outlier_extract_trial_rt(child_rt_outlier, "lsl")
 # Count N for each task
 rt_trial %>%
   group_by(group, task) %>%
+  filter(!is.na(reaction_time)) %>%
   summarize(n = length(unique(id))) %>%
   slice(match(c("lsl", "ssl", "vsl", "tsl"), task))
 ```
