@@ -326,9 +326,8 @@ rt_trial_scaled <- rt_trial_scaled[order(rt_trial_scaled$modality), ]
 head(rt_trial_scaled)
 ```
 
-## RT Model that has isSingular Warning:
+## RT Model:
 ```{r}
-# isSingular Warning:
 lmer_slope_m1 <-
   lmer(
     scaled_rt ~ group*targ_index*domain*modality + (1+domain+modality|id),
@@ -354,7 +353,7 @@ write.csv(as.data.frame(rtTrialModel$coefficients), "rtTrialModel.csv")
 
 ## Trying Other RT Models:
 ```{r}
-# Using raw reaction time and controlling for mean reaction time (isSingular Warning; Scaling issues)
+# Using raw reaction time and controlling for mean reaction time (Scaling issues)
 lmer_slope_m2 <-
   lmer(reaction_time~group*targ_index*domain*modality + mean_rt + (1+domain+modality| id),
        data = rt_trial_scaled,
@@ -884,7 +883,7 @@ compositeAgeLNscaled <- compositeAgeLNscaled[order(compositeAgeLNscaled$group),]
 
 head(compositeAgeLNscaled)
 ```
-## SL Cross-sectional Development Analyses: Younger group model has isSingular Warnings
+## SL Cross-sectional Development Analyses:
 ```{r}
 # Rescaling in each age group:
 compositeOldL <- compositeAgeLNscaled[which(compositeAgeLNscaled$ageSplit == "Old"),]
@@ -894,7 +893,7 @@ compositeOldL$composite_score <- scale(compositeOldL$composite_score)
 compositeYoungL <- compositeAgeLNscaled[which(compositeAgeLNscaled$ageSplit == "Young"),]
 compositeYoungL$composite_score <- scale(compositeYoungL$composite_score)
 
-# Younger group has isSingular Warnings
+# Younger group
 age_composite_m3 <- 
   lmer(composite_score ~ group*domain + (1|part_id),  
        data = compositeYoungL,
