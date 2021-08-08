@@ -166,6 +166,7 @@ print(taskcomp_count)
 
 ## Preprocess by trial RT data, remove the RT Slope outliers
 ```{r, include = F}
+# Outliers already removed in the data file (just to double check the removal)
 rt_trial <- read.csv("rt_trial.csv")
 
 outlier_extract_trial_rt <-
@@ -173,7 +174,7 @@ outlier_extract_trial_rt <-
     part_id <- DF[which(DF$task == task), "part_id"]
     
     if (length(part_id) != 0) {
-      rt_trial[-which(rt_trial$id %in% part_id & rt_trial$task == task), ]
+    rt_trial <- rt_trial[-which(rt_trial$id %in% part_id & rt_trial$task == task), ]
     }
     return(rt_trial)
   }
@@ -187,7 +188,7 @@ rt_trial <- outlier_extract_trial_rt(child_rt_outlier, "lsl")
 rt_trial %>%
   group_by(group, task) %>%
   filter(!is.na(reaction_time)) %>%
-  summarize(n = length(unique(id))) %>%
+  dplyr::summarise(n = length(unique(id))) %>%
   slice(match(c("lsl", "ssl", "vsl", "tsl"), task))
 ```
 
