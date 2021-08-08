@@ -170,11 +170,11 @@ print(taskcomp_count)
 rt_trial <- read.csv("rt_trial.csv")
 
 outlier_extract_trial_rt <-
-  function(DF, task) {
-    part_id <- DF[which(DF$task == task), "part_id"]
+  function(DF, taskName) {
+    part_id <- DF[which(DF$task == taskName), "part_id"]
     
     if (length(which(rt_trial$id %in% part_id & rt_trial$task == taskName)) != 0) {
-    rt_trial <- rt_trial[-which(rt_trial$id %in% part_id & rt_trial$task == task), ]
+    rt_trial <- rt_trial[-which(rt_trial$id %in% part_id & rt_trial$task == taskName), ]
     }
     return(rt_trial)
   }
